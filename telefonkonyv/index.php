@@ -12,6 +12,7 @@ and open the template in the editor.
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
         <script src="feldolgoz.js" type="text/javascript"></script>
+        <script src="feldolgoz2.js" type="text/javascript"></script>
     </head>
     <body>
         <main>
