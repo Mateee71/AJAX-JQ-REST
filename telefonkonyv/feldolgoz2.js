@@ -3,6 +3,9 @@ $(function(){
     $("#beolvas").on("click",beolvas);
     $("#kuld").on("click",adBeir);
     $("article").delegate(".torol","click", adTorol);
+    $("article").delegate(".szerkeszt","click", adSzerkeszt);
+    $("#megse").on("click", adMegse);
+    $("#modosit").on("click", adModosit);
     
 });
 
@@ -16,7 +19,8 @@ function kiir(){
         var nev = telefonkonyvem[i].nev;
         var tel = telefonkonyvem[i].tel;
         var kep = telefonkonyvem[i].kep;
-        var elem = "<div><h2>"+nev+"</h2><p>"+tel+"</p><p>"+tel+"</p><button class='torol' id='"+ID+"'>Törlés</button></div>";
+        var elem = "<div><h2>"+nev+"</h2><p>"+tel+"</p><p>"+kep+"</p>\n\
+        <button class='torol' id='"+ID+"'>Törlés</button></div><button class='szerkeszt' id='"+i+"'>Szerkeszt</button></div>";
             $("article").append(elem);
     }
     
@@ -75,6 +79,44 @@ function adTorol(){
         },
         error: function () {
             alert("Hiba az adatok törlésekor!");
+        }
+    });
+}
+
+function adSzerkeszt(){
+    console.log("Módosít");
+    $(".szerkesztes").removeClass("elrejt");
+    var index = $(this).attr("id");
+       $("#id2").val(telefonkonyvem[index].ID);
+       $("#nev2").val(telefonkonyvem[index].nev);
+       $("#tel2").val(telefonkonyvem[index].tel);
+       $("#kep2").val(telefonkonyvem[index].kep);
+    
+}
+
+function adMegse(){
+    $(".szerkesztes").addClass("elrejt");
+}
+
+function adModosit(){
+    var editSzemely = {
+        ID: $("#id2").val(),
+        nev: $("#nev2").val(),
+        tel:  $("#tel2").val(),
+        kep: $("#kep2").val()
+    };
+    console.log(editSzemely);
+    
+    $.ajax({
+        type: "PUT",
+        url: "modosit.php",
+        data: editSzemely,
+        success: function (){
+            beolvas();
+            
+        },
+        error: function () {
+            alert("Hiba az adatok módosításakor!");
         }
     });
 }
